@@ -1,0 +1,37 @@
+
+
+					**************************      READ ME      **************************
+					
+		Modifications personnelles apportées à l'architecture proposée:
+		--------------------------------------------------------------
+		
+   1) Ajout d'une classe abstraite publique Ghost qui représente les fantômes :
+   
+      -Elle hérite de la super-classe Predator
+      -Elle contient trois méthodes:
+      	 a) La méthode protected boolean scatter() qui retourne "true" si le fantôme est en mode SCATTER 
+      	 													    "false" si le fantôme est en mode CHASE
+      	 b) La méthode protected abstract Vector2D getTarget qui a pour paramètre un dédale et dont le
+      	 but est de retourner la cible du fantôme. Cette méthode est abstraite car elle doit être redéfinie
+      	 par chacun des fantômes étant donné que chaque fantôme choisit une cible différente.
+      	 c) La méthode Direction move(Direction[] choices, Daedalus daedalus) héritée de Predator redéfinie.
+      	 
+     Blinky, Pinky, Inky, Clyde deviennent des sous-classes de cette classe Ghost au lieu d'hériter de la classe 
+     Predator. (Pour que les images des fantômes soient affichées on ajoute au dossier img un dossier Ghost où on 
+     met des copies des images contenues dans le dossier Predator).
+     Les fantômes se déplacent tous de la même façon, par contre leur stratégie diffère: chaque fantôme vise une cible
+     différente, d'où la redéfinition de la méthode getTarget dans chaque sous-classe de Ghost.
+   
+   2) Ajout de la méthode choosePrey dans la classe Prédateur permettant à un prédateur de piocher une proie dans le dédale afin de la cibler. 
+     
+   3)Getters et setters ajoutés:
+   
+   	   -getter permettant de retourner la "maison" d'un prédateur dans la classe Predator pour pouvoir utiliser 
+   	   la position de cette maison dans la méthode getTarget comme cible de chaque fantôme en mode SCATTER.
+   	   -même getter mais cette fois ci de la "maison" d'une proie qui est la position de départ de cette dernière.
+   	   -getter de previousChoice dans la classe Prey pour pouvoir l'utiliser dans la méthode move.
+   	   -setter de previousChoice dans la classe Prey pour pouvoir modifier le previousChoice dans la méthode move.
+   
+   4) Pour une encapsulation le plus restrictif possible on a change le critère de visibilité de certaines méthodes 
+   publiques dans l'architecture proposée en protected.
+   	   												    
